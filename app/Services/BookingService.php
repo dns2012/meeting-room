@@ -120,14 +120,14 @@ class BookingService
         if (! $booking instanceof Booking) {
             return ResponseService::failure('Booking information not found, check your Booking ID.');
         }
+        if (! is_null($booking->check_in_time)) {
+            return ResponseService::failure('You already check in.');
+        }
         $currentTime = date('Y-m-d H:i:s');
         if ($data['action'] == 'checkin') {
             $booking->check_in_time = $currentTime;
             $emailSubject = 'Check In Information Meet.com';
             $emailTitle = 'Now that you are allowed to use the room, enjoy your meet';
-            if (! empty($booking->check_in_time)) {
-                return ResponseService::failure('You already check in.');
-            }
         } else {
             $booking->check_out_time = $currentTime;
             $emailSubject = 'Check Out Information Meet.com';
