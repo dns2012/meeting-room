@@ -125,7 +125,7 @@ class BookingService
             $booking->check_in_time = $currentTime;
             $emailSubject = 'Check In Information Meet.com';
             $emailTitle = 'Now that you are allowed to use the room, enjoy your meet';
-            if (! is_null($booking->check_in_time)) {
+            if (! empty($booking->check_in_time)) {
                 return ResponseService::failure('You already check in.');
             }
         } else {
